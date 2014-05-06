@@ -12,7 +12,7 @@ $(document).ready(function(){
     };
     newGame();
     
-    function newNumber() {
+    function feedback() {
         var userGuess = $('#userGuess').val();
         var hot = userGuess - secretNumber <= (Math.abs(10));
         var warm = userGuess - secretNumber <= (Math.abs(30));
