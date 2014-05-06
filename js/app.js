@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    var secretNumber = Math.ceil(Math.random() * 100);
+            console.log(secretNumber);
+    var secretString = secretNumber.toString();
     var guessCount = 0;
     var newGame = function() {
         newNumber();
@@ -10,10 +13,6 @@ $(document).ready(function(){
     newGame();
     
     function newNumber() {
-        var secretNumber = Math.ceil(Math.random() * 100);
-            console.log(secretNumber);
-        var secretString = secretNumber.toString();
-        
         var userGuess = $('#userGuess').val();
         var hot = userGuess - secretNumber <= (Math.abs(10));
         var warm = userGuess - secretNumber <= (Math.abs(30));
