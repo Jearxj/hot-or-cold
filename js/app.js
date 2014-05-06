@@ -1,55 +1,60 @@
 $(document).ready(function(){
-    /*var secretNumber = Math.ceil(Math.random() * 100);
-        console.log(secretNumber);
-    var secretString = secretNumber.toString();*/
+    var guessCount = 0;
     var newGame = function() {
+        newNumber();
+        guessCount = 0;
+        $('#count').html('<span>' + guessCount + '</span>');
+        $('#guessList').empty();
+        $('#userGuess').val('');
+    };
+    newGame();
+    
+    function newNumber() {
         var secretNumber = Math.ceil(Math.random() * 100);
             console.log(secretNumber);
         var secretString = secretNumber.toString();
-        i = 0;
-        $('#count').html('<span>' + i + '</span>');
-        $('#guessList').empty();
-        //guessNumber();
-    }
-    newGame();
-    var i = 0;
-    var comma = function () {
-        if (i !== 0) {
-        $('#guessList').append(", "); 
+        
+        var userGuess = $('#userGuess').val();
+        var hot = userGuess - secretNumber <= (Math.abs(10));
+        var warm = userGuess - secretNumber <= (Math.abs(30));
+        var cold = userGuess - secretNumber <= (Math.abs(60));
+        var freezing = userGuess - secretNumber <= (Math.abs(100));
+        
+        if (userGuess === secretString) {
+            console.log("winning");
+            alert("YOU GOT IT!");
+        } else if (hot === true) {
+            alert("HOT");
+        } else if (warm === true) {
+            alert("WARM");
+        } else if (cold === true) {
+            alert("COLD");
+        } else if (freezing === true) {
+            alert("FREEZING"); 
         }
+    };
+
+    var guessNumber = function() {
+        if (guessCount !== 0) {
+            $('#guessList').append(", "); 
+        }
+        guessCount++;
+        
+        $('#guessList').append($('#userGuess').val());
+        $('#userGuess').val('');
+        $('#count').html('<span>' + guessCount + '</span>');
+        
     }
-    var guessNumber = function () {
-        $('.button').on('click', function() {
-            event.preventDefault(); 
-            comma();
-            i++;
-            $('#count').html("<span>" + i + "</span>");
-            $('#guessList').append($('#userGuess').val());
-            var userGuess = $('#userGuess').val();
-                while(userGuess) {
-                    if (userGuess === secretString) {
-                        alert("YOU GOT IT! Click +NEW GAME to start a new game.");
-                        var userGuess = false;
-                    } else if (userGuess <= 20) {
-                        alert("ICEEEEE COLD!!!!! Guess again!");
-                        var userGuess = false;
-                    } else if (userGuess <= 40) {
-                        alert("STILL COLD. Guess again!");
-                        var userGuess = false;
-                    } else if (userGuess <= 60) {
-                        alert("WARMER. Guess again!");
-                        var userGuess = false;
-                    } else if (userGuess <= 80) {
-                        alert("IT'S GETTING HOT IN HERE! Guess again!");
-                        var userGuess = false;
-                    } else if (userGuess <= 100) {
-                        alert("SOOO CLOSE...but keep guessing!");
-                        var userGuess = false;
-                    }
-                
-                }
-        })
-    }
+    
+    $('.new').on('click', function() {
+        newGame();
+    });
+        
+    $('form').on('submit', function(event) {
+        event.preventDefault();
+        guessNumber();
+        
+    });
 
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -62,15 +67,6 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
     
-    $('.new').on('click', function() {
-        newGame();
-
-    })
-    $('#userGuess').on('submit', function(event) {
-        event.preventDefault();
-    })
-    guessNumber();
-
 });
 
 
