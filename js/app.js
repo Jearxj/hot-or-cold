@@ -1,23 +1,28 @@
 $(document).ready(function(){
-    var secretNumber = Math.ceil(Math.random() * 100);
-            console.log(secretNumber);
-    var secretString = secretNumber.toString();
+    var secretNumber = newNumber();
+    
+    function newNumber() {
+        return Math.ceil(Math.random() * 100);
+        }
+        console.log(secretNumber);
     var guessCount = 0;
+    
     var newGame = function() {
-        newNumber();
+        secretNumber = newNumber();
         guessCount = 0;
         $('#count').html('<span>' + guessCount + '</span>');
         $('#guessList').empty();
         $('#userGuess').val('');
     };
     newGame();
+    console.log(secretNumber);
     
     function feedback() {
         var userGuess = $('#userGuess').val();
-        var hot = userGuess - secretNumber <= (Math.abs(10));
-        var warm = userGuess - secretNumber <= (Math.abs(30));
-        var cold = userGuess - secretNumber <= (Math.abs(60));
-        var freezing = userGuess - secretNumber <= (Math.abs(100));
+        var hot = Math.abs(userGuess - secretNumber) <= 10;
+        var warm = Math.abs(userGuess - secretNumber) <= 30;
+        var cold = Math.abs(userGuess - secretNumber) <= 60;
+        var freezing = Math.abs(userGuess - secretNumber) <= 100;
         
         if (userGuess === secretString) {
             console.log("winning");
