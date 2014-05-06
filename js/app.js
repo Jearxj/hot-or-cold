@@ -9,35 +9,33 @@ $(document).ready(function(){
     
     var newGame = function() {
         secretNumber = newNumber();
+            console.log(secretNumber);
         guessCount = 0;
+        feedback();
         $('#count').html('<span>' + guessCount + '</span>');
         $('#guessList').empty();
         $('#userGuess').val('');
     };
-    newGame();
-    console.log(secretNumber);
-    
+            
+    var userGuess = $('#userGuess').val();
+        console.log("userGuess");
     function feedback() {
-        var userGuess = $('#userGuess').val();
-        var hot = Math.abs(userGuess - secretNumber) <= 10;
-        var warm = Math.abs(userGuess - secretNumber) <= 30;
-        var cold = Math.abs(userGuess - secretNumber) <= 60;
-        var freezing = Math.abs(userGuess - secretNumber) <= 100;
+        console.log("feedback working");
         
-        if (userGuess === secretString) {
+        if (userGuess == secretNumber) {
             console.log("winning");
             alert("YOU GOT IT!");
-        } else if (hot === true) {
+        } else if (Math.abs(userGuess - secretNumber) <= 10) {
             alert("HOT");
-        } else if (warm === true) {
+        } else if (Math.abs(userGuess - secretNumber) <= 30) {
             alert("WARM");
-        } else if (cold === true) {
+        } else if (Math.abs(userGuess - secretNumber) <= 60) {
             alert("COLD");
-        } else if (freezing === true) {
+        } else if (Math.abs(userGuess - secretNumber) <= 100) {
             alert("FREEZING"); 
         }
     };
-
+    
     var guessNumber = function() {
         if (guessCount !== 0) {
             $('#guessList').append(", "); 
@@ -46,8 +44,7 @@ $(document).ready(function(){
         
         $('#guessList').append($('#userGuess').val());
         $('#userGuess').val('');
-        $('#count').html('<span>' + guessCount + '</span>');
-        
+        $('#count').html('<span>' + guessCount + '</span>');  
     }
     
     $('.new').on('click', function() {
@@ -57,7 +54,7 @@ $(document).ready(function(){
     $('form').on('submit', function(event) {
         event.preventDefault();
         guessNumber();
-        
+        feedback(userGuess);
     });
 
 	/*--- Display information modal box ---*/
