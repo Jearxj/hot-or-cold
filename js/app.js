@@ -21,7 +21,7 @@ $(document).ready(function(){
         console.log("userGuess working");
     
     //give the user feedbacks
-    function feedback() {
+    var feedback = function(userGuess) {
         console.log("feedback working");
         
         if (userGuess == secretNumber) {
