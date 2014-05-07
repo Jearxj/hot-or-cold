@@ -7,18 +7,20 @@ $(document).ready(function(){
         console.log(secretNumber);
     var guessCount = 0;
     
+    //start a new game
     var newGame = function() {
         secretNumber = newNumber();
             console.log(secretNumber);
         guessCount = 0;
-        feedback();
         $('#count').html('<span>' + guessCount + '</span>');
         $('#guessList').empty();
         $('#userGuess').val('');
     };
             
     var userGuess = $('#userGuess').val();
-        console.log("userGuess");
+        console.log("userGuess working");
+    
+    //give the user feedbacks
     function feedback() {
         console.log("feedback working");
         
@@ -36,6 +38,7 @@ $(document).ready(function(){
         }
     };
     
+    //adding functions to make the button, # of guesses, and appending guessed numbers work
     var guessNumber = function() {
         if (guessCount !== 0) {
             $('#guessList').append(", "); 
