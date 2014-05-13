@@ -3,22 +3,20 @@ $(document).ready(function(){
     
     function newNumber() {
         return Math.ceil(Math.random() * 100);
-        }
-        console.log(secretNumber);
+    }
+    console.log(secretNumber);
     var guessCount = 0;
     
     //start a new game
     var newGame = function() {
         secretNumber = newNumber();
-            console.log(secretNumber);
+        //DEBUG
+        console.log(secretNumber);
         guessCount = 0;
         $('#count').html('<span>' + guessCount + '</span>');
         $('#guessList').empty();
         $('#userGuess').val('');
     };
-            
-    var userGuess = $('#userGuess').val();
-        console.log("userGuess working");
     
     //give the user feedbacks
     var feedback = function(userGuess) {
@@ -55,7 +53,9 @@ $(document).ready(function(){
     });
         
     $('form').on('submit', function(event) {
+        var userGuess = $('#userGuess').val();
         event.preventDefault();
+        
         guessNumber();
         feedback(userGuess);
     });
