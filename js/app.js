@@ -23,16 +23,27 @@ $(document).ready(function(){
         console.log("feedback working");
         
         if (userGuess == secretNumber) {
-            console.log("winning");
-            alert("YOU GOT IT!");
+            $('#feedback').text("YOU GOT IT!");
         } else if (Math.abs(userGuess - secretNumber) <= 10) {
-            alert("HOT");
+            $('#feedback').text("HOT!");
         } else if (Math.abs(userGuess - secretNumber) <= 30) {
-            alert("WARM");
+            $('#feedback').text("WARM!");
         } else if (Math.abs(userGuess - secretNumber) <= 60) {
-            alert("COLD");
+            $('#feedback').text("COLD!");
         } else if (Math.abs(userGuess - secretNumber) <= 100) {
-            alert("FREEZING"); 
+            $('#feedback').text("FREEZING!"); 
+        }
+    };
+            
+    //Testing for only numerical inputs
+    var pattern = function(userGuess) {
+        var reg = /^\d+$/;
+        return reg.test();
+        //debug
+        console.log("pattern checked");
+
+        if (!(reg.test())) {
+            alert('error');
         }
     };
     
@@ -58,6 +69,8 @@ $(document).ready(function(){
         
         guessNumber();
         feedback(userGuess);
+        
+        pattern(userGuess);
     });
 
 	/*--- Display information modal box ---*/
