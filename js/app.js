@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     var secretNumber = newNumber();
     
     function newNumber() {
