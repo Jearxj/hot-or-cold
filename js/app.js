@@ -56,14 +56,15 @@ $(document).ready(function(){
         var userGuess = $('#userGuess').val();
         
         //Testing for numerical input
-        var str = userGuess;
-        var pattern = /^\d+$/;
-        var result = pattern.test(str);
-        
-        if (!(pattern.test(str))) {
+        if (!(/^-?\d+$/.test(userGuess))) {
             alert("Please put in only numbers!");
-        };
-
+            return;
+        }
+        if (userGuess < 0 || userGuess > 100) {
+            alert("Please a number between 0 and 100!");
+            return;
+        } 
+        
         guessNumber();
         feedback(userGuess);
 
