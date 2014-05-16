@@ -34,19 +34,7 @@ $(document).ready(function(){
             $('#feedback').text("FREEZING!"); 
         }
     };
-            
-    //Testing for only numerical inputs
-    var pattern = function(userGuess) {
-        var reg = /^\d+$/;
-        return reg.test();
-        //debug
-        console.log("pattern checked");
 
-        if (!(reg.test())) {
-            alert('error');
-        }
-    };
-    
     //adding functions to make the button, # of guesses, and appending guessed numbers work
     var guessNumber = function() {
         if (guessCount !== 0) {
@@ -64,13 +52,21 @@ $(document).ready(function(){
     });
         
     $('form').on('submit', function(event) {
-        var userGuess = $('#userGuess').val();
         event.preventDefault();
+        var userGuess = $('#userGuess').val();
         
+        //Testing for numerical input
+        var str = userGuess;
+        var pattern = /^\d+$/;
+        var result = pattern.test(str);
+        
+        if (!(pattern.test(str))) {
+            alert("Please put in only numbers!");
+        };
+
         guessNumber();
         feedback(userGuess);
-        
-        pattern(userGuess);
+
     });
 
 	/*--- Display information modal box ---*/
